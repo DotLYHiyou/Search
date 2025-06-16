@@ -21,7 +21,5 @@ app.use((req, res) => {
     res.send("404 Error: Page not found");
 });
 
-listen(port, () => {
-    console.log(`Chemical proxy server listening on port ${port}`);
-    console.log(`Access your proxy at: http://localhost:${port}`);
-});
+// EXPORT THE APP FOR VERCEL
+module.exports = app;
