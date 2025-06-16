@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     },
     {
@@ -13,23 +13,19 @@
   "routes": [
     {
       "src": "/chemical.js",
-      "dest": "/index.js"
+      "dest": "/api/index.js"
     },
     {
       "src": "/chemical.components.js",
-      "dest": "/index.js"
+      "dest": "/api/index.js"
     },
     {
       "src": "/chemical.cloaking.js",
-      "dest": "/index.js"
-    },
-    {
-      "src": "/(.*\\.[a-zA-Z0-9]+)$",
-      "dest": "/public/$1"
+      "dest": "/api/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.js"
+      "dest": "/api/index.js"
     }
   ]
 }
