@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title is="chemical-title" data-title-store>My Chemical Proxy</title>
+    <link rel="icon" is="chemical-icon" data-icon-store href="https://placehold.co/32x32/1a202c/ffffff?text=P">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #1a202c;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 500px;
+            color: #e2e8f0;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #cbd5e0;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 9999px;
+            transition: background-color 0.2s;
+        }
+        .close-button:hover {
+            background-color: #374151;
+        }
+    </style>
+    <script data-transport="epoxy" src="/chemical.js"></script>
+    <script src="/chemical.components.js"></script>
+    <script src="/chemical.cloaking.js"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 font-sans antialiased flex flex-col min-h-screen">
+    <div class="container mx-auto p-4 flex-grow flex flex-col items-center">
+        <header class="w-full max-w-2xl text-center mb-6">
+            <h1 class="text-4xl font-bold text-blue-400 mb-4 rounded-xl p-3 shadow-lg bg-gray-800">
+                Secure Web Access
+            </h1>
+        </header>
+        <div class="w-full max-w-2xl bg-gray-800 p-6 rounded-xl shadow-xl flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+            <input
+                id="proxy-input"
+                is="chemical-input"
+                data-target="_self"
+                data-service="scramjet"
+                data-auto-http
+                data-search-engine="https://www.google.com/search?q=%s"
+                data-frame="proxy-iframe"
+                placeholder="Enter URL or search query..."
+                class="flex-grow p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-inner"
+            >
+            <button
+                data-for="proxy-input"
+                is="chemical-button"
+                class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+            >
+                Go!
+            </button>
+        </div>
+        <div class="w-full max-w-2xl flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4 mb-6">
+            <!-- Changed button text and functionality -->
+            <button
+                id="launch-blank-button"
+                class="w-full md:w-auto px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75"
+            >
+                Open URL in New Tab
+            </button>
+            <button
+                id="credits-button"
+                class="w-full md:w-auto px-6 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75"
+            >
+                Credits
+            </button>
+        </div>
+        <div class="w-full flex-grow flex flex-col bg-gray-800 rounded-xl shadow-xl overflow-hidden mb-6">
+            <section id="iframe-controls" is="chemical-controls" class="p-3 bg-gray-700 flex flex-wrap justify-center gap-4 border-b border-gray-600">
+                <button onclick="chemical.componentAction('back', 'proxy-iframe')" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition duration-200 text-sm md:text-base">Back</button>
+                <button onclick="chemical.componentAction('forward', 'proxy-iframe')" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition duration-200 text-sm md:text-base">Forward</button>
+                <button onclick="chemical.componentAction('reload', 'proxy-iframe')" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500 transition duration-200 text-sm md:text-base">Reload</button>
+                <button onclick="chemical.componentAction('close', 'proxy-iframe')" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200 text-sm md:text-base">Close</button>
+            </section>
+            <iframe
+                id="proxy-iframe"
+                is="chemical-iframe"
+                data-controls="iframe-controls"
+                class="w-full h-full min-h-[500px] bg-white rounded-b-xl"
+            ></iframe>
+        </div>
+    </div>
+    <div id="credits-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-button" onclick="document.getElementById('credits-modal').classList.add('hidden')">&times;</button>
+            <h2 class="text-2xl font-bold text-blue-300 mb-4">Credits</h2>
+            <p class="mb-2">
+                Code assistance by: <span class="font-semibold">Gemini</span>
+            </p>
+            <p class="mb-2">
+                Frontend (Client) functionality:
+                <a href="#" class="text-blue-400 hover:underline" data-credit-link="https://github.com/chemical-js/chemicaljs">ChemicalJS</a>
+            </p>
+            <p class="mb-2">
+                Backend (Rewriting/Proxy) functionality:
+                <a href="#" class="text-blue-400 hover:underline" data-credit-link="https://github.com/chemical-js/scramjet">Scramjet</a>
+            </p>
+            <p class="mb-2">
+                Special thanks to: <span class="font-semibold">Zenithub</span>
+            </p>
+            <p class="text-sm mt-4 text-gray-400">
+                (Clicking the links above will close this menu and open them through the proxy.)
+            </p>
+        </div>
+    </div>
+    <script>
+        const launchBlankButton = document.getElementById("launch-blank-button");
+        const creditsButton = document.getElementById("credits-button");
+        const creditsModal = document.getElementById("credits-modal");
+        const proxyIframe = document.getElementById("proxy-iframe");
+
+        // --- UPDATED LAUNCH BUTTON FUNCTIONALITY ---
+        launchBlankButton.addEventListener("click", async () => { // Added 'async' keyword
+            const url = prompt("Enter the URL to open in a new tab:");
+            if (url) {
+                // Ensure chemical.js is loaded and its encode function is available
+                if (window.chemical && window.chemical.encode) {
+                    try {
+                        // Encode the URL through the proxy (Scramjet)
+                        const proxiedUrl = await chemical.encode(url, {
+                            service: "scramjet", // Explicitly use scramjet
+                            autoHttps: true      // Automatically add https:// if needed
+                        });
+                        // Open the encoded URL directly in a new tab
+                        window.open(proxiedUrl, '_blank');
+                    } catch (error) {
+                        console.error("Error encoding URL for new tab:", error);
+                        alert("Could not open URL in new tab. See console for details.");
+                    }
+                } else {
+                    console.error("ChemicalJS encode function not loaded yet.");
+                    alert("ChemicalJS is not ready. Please try again in a moment.");
+                }
+            }
+        });
+        // --- END UPDATED FUNCTIONALITY ---
+
+        creditsButton.addEventListener("click", () => {
+            creditsModal.classList.remove('hidden');
+        });
+
+        const creditLinks = document.querySelectorAll('#credits-modal a[data-credit-link]');
+        creditLinks.forEach(link => {
+            link.addEventListener('click', async (event) => {
+                event.preventDefault();
+                const targetUrl = event.target.dataset.creditLink;
+                if (targetUrl) {
+                    creditsModal.classList.add('hidden');
+                    if (window.chemical && window.chemical.encode) {
+                        try {
+                            const proxiedUrl = await chemical.encode(targetUrl, {
+                                service: "scramjet",
+                                autoHttps: true
+                            });
+                            proxyIframe.src = proxiedUrl;
+                        } catch (error) {
+                            console.error("Error encoding or setting iframe source for credit link:", error);
+                            alert("Could not open link through proxy. Check the browser console for more details.");
+                        }
+                    } else {
+                        console.error("ChemicalJS is not fully loaded or 'encode' function is missing.");
+                        alert("ChemicalJS is not ready to open links. Please try again.");
+                    }
+                }
+            });
+        });
+
+        window.addEventListener("chemicalLoaded", function() {
+            console.log("ChemicalJS and its components are fully loaded and ready!");
+        });
+    </script>
+</body>
+</html>
