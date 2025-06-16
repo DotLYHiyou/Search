@@ -1,6 +1,6 @@
 const { ChemicalServer } = require("chemicaljs");
 const express = require("express");
-const path = require('path');
+
 
 const [app, listen] = new ChemicalServer({
     default: "scramjet",
@@ -9,10 +9,6 @@ const [app, listen] = new ChemicalServer({
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'public'), {
-    index: "index.html",
-    extensions: ["html"]
-}));
 
 app.serveChemical();
 

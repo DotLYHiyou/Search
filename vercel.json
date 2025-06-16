@@ -4,9 +4,29 @@
     {
       "src": "index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
+    {
+      "src": "/chemical.js",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/chemical.components.js",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/chemical.cloaking.js",
+      "dest": "/index.js"
+    },
+    {
+      "src": "/(.*\\.[a-zA-Z0-9]+)$",
+      "dest": "/public/$1"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.js"
